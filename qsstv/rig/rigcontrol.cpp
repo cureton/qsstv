@@ -221,7 +221,8 @@ bool rigControl::setPTT(bool on)
 {
     int retcode;
     ptt_t ptt;
-    if(on) ptt=RIG_PTT_ON; else ptt=RIG_PTT_OFF;
+    /* Hamlib will fall back to RIG_PTT_ON if RIG_PTT_ON_DATA is not available in current hamlib configuration */	
+    if(on) ptt=RIG_PTT_ON_DATA; else ptt=RIG_PTT_OFF;
     if(!rigControlEnabled) return false;
     retcode = rig_set_ptt (my_rig, RIG_VFO_CURR,ptt);
     if (retcode != RIG_OK ) {errorMessage(retcode,"setPTT"); return false; }
