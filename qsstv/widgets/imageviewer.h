@@ -66,6 +66,11 @@ public:
 //  void scale( int w, int h);
   QImage * getImagePtr() {return &sourceImage;}
   bool hasValidImage();
+  void setValidImage(bool v)
+  {
+    validImage=v;
+  }
+
   void createImage(QSize sz, QColor fill, bool scale);
   QRgb *getScanLineAddress(int line);
   void copy(imageViewer *src);

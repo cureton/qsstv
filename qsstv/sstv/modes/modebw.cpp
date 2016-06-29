@@ -107,19 +107,19 @@ modeBase::embState modeBW::txSetupLine()
   start=lineTimeTableTX[lineCounter];
   switch(subLine)
 		{
-			case 0:
+      case 1:
         calcPixelPositionTable(GREENLINE,true);
 				pixelArrayPtr=greenArrayPtr;
 				return MBPIXELS;
-			case 1:
+      case 2:
         txFreq=lowerFreq;
 				txDur=(unsigned int)rint(fp);
 				return MBTXGAP;
-			case 2:
+      case 3:
         txFreq=syncFreq;
 				txDur=(unsigned int)rint(syncDuration);
 				return MBTXGAP;
-			case 3:
+      case 0:
         txFreq=lowerFreq;
 				txDur=(unsigned int)rint(bp);
 				return MBTXGAP;

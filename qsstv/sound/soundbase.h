@@ -24,9 +24,9 @@
 
 
 #define PERIODSIZE (DOWNSAMPLESIZE)
-#define BUFFERSIZE (8*DOWNSAMPLESIZE*2)
+#define BUFFERSIZE (8*DOWNSAMPLESIZE)
 #define CALIBRATIONSIZE (PERIODSIZE)
-#define CALIBRATIONLEADIN 20
+#define CALIBRATIONLEADIN 80
 
 
 class soundBase : public QThread
@@ -78,6 +78,7 @@ protected:
   virtual void prepareCapture() {;}
   virtual void preparePlayback() {;}
   virtual void closeDevices()=0;
+  virtual void waitPlaybackEnd()=0;
 
 
   int sampleRate;

@@ -96,16 +96,17 @@ void soundBase::run()
         {
           prebuf=false;
           switchPlaybackState(PBRUNNING);
-          addToLog("playback started",LOGPERFORM);
+          addToLog("playback started",LOGSOUND);
         }
       break;
       case PBRUNNING:
         if (play()==0)
         {
-          addToLog(QString("playback stopped: delay=%1").arg(delay),LOGPERFORM);
+          addToLog(QString("playback stopped: delay=%1").arg(delay),LOGSOUND);
+          waitPlaybackEnd();
           msleep(delay);
           waveOut.close();
-          addToLog("playback stopped",LOGPERFORM);
+          addToLog("playback stopped",LOGSOUND);
           switchPlaybackState(PBINIT);
         }
         msleep(0);
@@ -221,6 +222,7 @@ bool soundBase::calibrate(bool isCapture)
   calibrationTime=0;
   ucalibrationTime=0;
   leadInCounter=0;
+  prevFrames=0;
   if (!isRunning()) start();
   if (isCapture)
   {
@@ -377,7 +379,9 @@ int soundBase::play()
   }
   txBuffer.copyNoCheck(tempTXBuffer,numFrames);
   addToLog(QString("frames to write: %1 at %2 buffered:%3").arg(numFrames).arg(txBuffer.getReadIndex()).arg(txBuffer.count()),LOGSOUND);
-  framesWritten=write(numFrames);
+
+//  framesWritten=write(numFrames);
+  framesWritten=write(DOWNSAMPLESIZE);
   addToLog(QString("frames written: %1").arg(framesWritten),LOGSOUND);
   if(framesWritten<0)
     {

@@ -130,6 +130,8 @@ int soundAlsa::read(int &countAvailable)
 int soundAlsa::write(uint numFrames)
 {
   int error,framesWritten;
+  snd_pcm_sframes_t availp;
+  snd_pcm_sframes_t delayp;
   if((framesWritten =  snd_pcm_writei ( playbackHandle, tempTXBuffer, numFrames))<0)
   {
     alsaErrorHandler(framesWritten,"Error in writing to "+inputAudioDevice);
@@ -158,8 +160,29 @@ int soundAlsa::write(uint numFrames)
   {
     errorHandler("Sound write error",QString("Frames written = %1").arg(framesWritten));
   }
+  snd_pcm_avail_delay 	( playbackHandle,&availp,&delayp);
+  addToLog(QString("latency %1 %2").arg(availp).arg(delayp),LOGSOUND);
   return framesWritten;
 }
+
+void soundAlsa::waitPlaybackEnd()
+{
+
+//  int i;
+//  snd_pcm_sframes_t availp;
+//  snd_pcm_sframes_t delayp;
+
+  addToLog("waitPlaybackend",LOGSOUND);
+  snd_pcm_drain(playbackHandle);
+  addToLog("drain end",LOGSOUND);
+//  for(i=0;i<20;i++)
+//  {
+//  snd_pcm_avail_delay 	( playbackHandle,&availp,&delayp);
+//  addToLog(QString("latency%1 %2 %3").arg(i+1).arg(availp).arg(delayp),LOGSOUND);
+//  msleep(200);
+//  }
+}
+
 
 
 void soundAlsa::flushCapture()

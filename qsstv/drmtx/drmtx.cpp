@@ -55,6 +55,7 @@ bool drmTx::initDRMImage(bool binary,QString fileName)
   QFileInfo finf;
   QFile inf;
   hybridCrypt hc;
+  init();
   setTxParams(drmParams);
   // we need to save it as a jpg file
   if(binary)

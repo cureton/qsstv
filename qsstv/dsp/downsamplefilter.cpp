@@ -183,7 +183,7 @@ void downsampleFilter::downSample4(short int *data)
 
 // rFIR
 // localSamplingrate = 48000.000000
-// number of taps = 181
+// number of taps = 180
 // Band0 Lower=0.000000, Upper=2800.000000, Desired=2.000000, Weight=1.000000
 // Band1 Lower=3500.000000, Upper=24000.000000, Desired=0.000000, Weight=10.000000
 //Coefficients:

@@ -39,6 +39,7 @@
 #include "scope/scopeoffset.h"
 #include "rxfunctions.h"
 #include "logbook.h"
+#include "testpatternselection.h"
 #include <QFont>
 #include <QCloseEvent>
 #include <QMessageBox>
@@ -128,7 +129,7 @@ mainWindow::mainWindow(QWidget *parent) : QMainWindow(parent),  ui(new Ui::MainW
   connect(rxWidgetPtr,SIGNAL(modeSwitch(int)),this, SLOT(slotModeChange(int)));
   connect(txWidgetPtr,SIGNAL(modeSwitch(int)),this, SLOT(slotModeChange(int)));
 
- #ifdef ENABLELOGGING
+#ifdef ENABLELOGGING
   connect(ui->actionLogSettings, SIGNAL(triggered()),SLOT(slotLogSettings()));
   connect(ui->actionResetLog, SIGNAL(triggered()),SLOT(slotResetLog()));
 #else
@@ -141,7 +142,11 @@ mainWindow::mainWindow(QWidget *parent) : QMainWindow(parent),  ui(new Ui::MainW
   connect(ui->actionShowSyncScopeNarrow, SIGNAL(triggered()),SLOT(slotShowSyncScopeNarrow()));
   connect(ui->actionShowSyncScopeWide, SIGNAL(triggered()),SLOT(slotShowSyncScopeWide()));
   connect(ui->actionScopeOffset,SIGNAL(triggered()),this, SLOT(slotScopeOffset()));
+  connect(ui->actionClearScope,SIGNAL(triggered()),this, SLOT(slotClearScope()));
   connect(ui->actionDumpSamplesPerLine,SIGNAL(triggered()),this, SLOT(slotDumpSamplesPerLine()));
+  connect(ui->actionTxTestPattern,SIGNAL(triggered()),this, SLOT(slotTxTestPattern()));
+
+
 
 #else
   ui->menuOptions->removeAction(ui->actionDumpSamplesPerLine);
@@ -245,7 +250,7 @@ void mainWindow::readSettings()
   transmissionModeIndex=(etransmissionMode)qSettings.value("transmissionModeIndex",0).toInt();
   qSettings.endGroup();
   ui->spectrumFrame->readSettings();
-//  configDialogPtr->readSettings();
+  //  configDialogPtr->readSettings();
   logFilePtr->readSettings();
 
 }
@@ -406,7 +411,7 @@ void mainWindow::slotSendID()
 
 void mainWindow::slotSendWfText()
 {
- txWidgetPtr->sendWfText();
+  txWidgetPtr->sendWfText();
 }
 
 void mainWindow::slotSetFrequency(int freqIndex)
@@ -439,12 +444,12 @@ void mainWindow::slotSetFrequency(int freqIndex)
 
 void mainWindow::timerEvent(QTimerEvent *)
 {
-    double fr;
-    if(rigControllerPtr->getFrequency(fr))
-      {
-    fr/=1000000.;
-    if(fr>1) freqDisplay->setText(QString::number(fr,'f',6));
-      }
+  double fr;
+  if(rigControllerPtr->getFrequency(fr))
+    {
+      fr/=1000000.;
+      if(fr>1) freqDisplay->setText(QString::number(fr,'f',6));
+    }
 }
 
 void mainWindow::cleanUpCache(QString dirPath)
@@ -463,27 +468,27 @@ void mainWindow::cleanUpCache(QString dirPath)
   cacheFileList = dirCache.entryInfoList();
   // get a orgiriginal filelist
   for(i=0;i<cacheFileList.count();i++)
-  {
-    found=false;
-    for(j=0;j<orgFileList.count();j++)
     {
+      found=false;
+      for(j=0;j<orgFileList.count();j++)
+        {
 
-      if(cacheFileList.at(i).baseName()==QString(orgFileList.at(j).baseName()+orgFileList.at(j).created().toString()))
-      {
-        found=true;
-        break;
-      }
+          if(cacheFileList.at(i).baseName()==QString(orgFileList.at(j).baseName()+orgFileList.at(j).created().toString()))
+            {
+              found=true;
+              break;
+            }
+        }
+      if(!found)
+        {
+          removeFileList.append(cacheFileList.at(i));
+        }
     }
-   if(!found)
-   {
-     removeFileList.append(cacheFileList.at(i));
-   }
-  }
   for(i=0;i<removeFileList.count();i++)
-  {
-    QFile fi(removeFileList.at(i).absoluteFilePath());
-    fi.remove();
-  }
+    {
+      QFile fi(removeFileList.at(i).absoluteFilePath());
+      fi.remove();
+    }
 }
 
 
@@ -507,12 +512,29 @@ void mainWindow::slotScopeOffset()
   dataScopeOffset=rxWidgetPtr->functionsPtr()->setOffset(dataScopeOffset,true);
 }
 
+
+
 void mainWindow::slotDumpSamplesPerLine()
 {
   dumpSamplesPerLine();
 }
 
+void mainWindow::slotClearScope()
+{
+  scopeViewerData->clear();
+  scopeViewerSyncNarrow->clear();
+  scopeViewerSyncWide->clear();
+}
 
-
+void mainWindow::slotTxTestPattern()
+{
+  etpSelect sel;
+  testPatternSelection tpsel;
+  if(tpsel.exec()==QDialog::Accepted)
+    {
+      sel=tpsel.getSelection();
+      txWidgetPtr->txTestPattern(sel);
+    }
+}
 
 #endif

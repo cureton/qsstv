@@ -26,6 +26,7 @@ protected:
   void flushCapture();
   void flushPlayback();
   void closeDevices();
+  void waitPlaybackEnd();
 private:
   struct stream_data {
     pa_simple*	stream;

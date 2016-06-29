@@ -37,6 +37,7 @@ public:
   txFunctions *functionsPtr() {return txFunctionsPtr;}
   imageViewer *getImageViewerPtr(){ return imageViewerPtr;}
   QString getPreviewFilename();
+  void txTestPattern(etpSelect sel);
 
   void setDRMNotifyText(QString txt) {      
       //ui->txNotificationList->clear();                 

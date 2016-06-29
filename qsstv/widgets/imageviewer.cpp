@@ -112,7 +112,8 @@ bool imageViewer::openImage(QString &filename,QString start,bool ask,bool showMe
   editorScene ed;
   bool success=false;
   bool cacheHit=false;
-  cacheFileName=finf.absolutePath()+"/cache/"+finf.baseName()+finf.created().toString()+".png";
+
+
 
   if(activeMovie)
   {
@@ -133,6 +134,7 @@ bool imageViewer::openImage(QString &filename,QString start,bool ask,bool showMe
 
   if(fromCache)
   {
+    cacheFileName=finf.absolutePath()+"/cache/"+finf.baseName()+finf.created().toString()+".png";
     if(tempImage.load(cacheFileName))
     {
       cacheHit=true;
@@ -192,10 +194,10 @@ bool imageViewer::openImage(QString &filename,QString start,bool ask,bool showMe
   }
   else
   {
+    sourceImage=tempImage.convertToFormat(QImage::Format_ARGB32_Premultiplied);
     orgWidth=tempImage.width();
     orgHeight=tempImage.height();
-    displayedImage=tempImage;
-    sourceImage=tempImage;
+    displayedImage=sourceImage;
   }
 
   imageFileName=filename;
@@ -323,6 +325,8 @@ void imageViewer::displayImage()
   }
   else
   {
+    qDebug()<< "xy" << width() << height() << hasScaledContents();
+
     setPixmap(QPixmap::fromImage(displayedImage));
   }
 

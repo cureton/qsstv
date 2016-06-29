@@ -23,6 +23,7 @@ protected:
   void flushCapture();
   void flushPlayback();
   void closeDevices();
+  void waitPlaybackEnd();
 
 private:
   bool setupSoundParams(bool isCapture);

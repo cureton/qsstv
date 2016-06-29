@@ -177,7 +177,8 @@ SOURCES += main.cpp\
     utils/fftcalc.cpp \
     config/hybridnotifyconfig.cpp \
     utils/jp2io.cpp \
-    utils/color.cpp
+    utils/color.cpp \
+    widgets/testpatternselection.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -345,7 +346,8 @@ HEADERS  += mainwindow.h \
     utils/fftcalc.h \
     config/hybridnotifyconfig.h \
     utils/jp2io.h \
-    utils/color.h
+    utils/color.h \
+    widgets/testpatternselection.h
 
 
 FORMS += mainwindow.ui \
@@ -386,7 +388,8 @@ FORMS += mainwindow.ui \
     drmrx/fixform.ui \
     config/frequencyselectwidget.ui \
     editor/canvassizeform.ui \
-    config/hybridnotifyconfig.ui
+    config/hybridnotifyconfig.ui \
+    widgets/testpatternselection.ui
 
  LIBS += -lasound \
          -lpulse \

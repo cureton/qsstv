@@ -20,6 +20,7 @@
 #include "mainwindow.h"
 #include "rigcontrol.h"
 #include "imageviewer.h"
+#include "testpatternselection.h"
 
 
 
@@ -449,13 +450,6 @@ void txWidget::applyTemplate()
   txFunctionsPtr->applyTemplate(imageViewerPtr,galleryWidgetPtr->getTemplateFileName(ui->templatesComboBox->currentIndex()));
 }
 
-//void 	txWidget::setImage(QImage *im)
-//{
-//  if(imageViewerPtr->openImage(*im))
-//    {
-//      applyTemplate();
-//    }
-//}
 
 void 	txWidget::setImage(QString fn)
 {
@@ -673,6 +667,11 @@ void txWidget::slotBinary()
   dispatcherPtr->startDRMTxBinary();
 }
 
+
+void txWidget::txTestPattern(etpSelect sel)
+{
+  txFunctionsPtr->txTestPattern(imageViewerPtr,sel);
+}
 
 
 

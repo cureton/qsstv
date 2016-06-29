@@ -4,7 +4,7 @@
 QString cwText;
 int cwTone;
 int cwWPM;
-bool enableCW;
+//bool enableCW;
 
 cwConfig::cwConfig(QWidget *parent) :  baseConfig(parent), ui(new Ui::cwConfig)
 {
@@ -23,7 +23,7 @@ void cwConfig::readSettings()
   cwText=qSettings.value("cwtext","").toString();
   cwTone=qSettings.value("cwtone",800).toInt();
   cwWPM=qSettings.value("cwWPM",12).toInt();
-  enableCW=qSettings.value("enableCW",false).toBool();
+//  enableCW=qSettings.value("enableCW",false).toBool();
   qSettings.endGroup();
   setParams();
 }
@@ -37,7 +37,7 @@ void cwConfig::writeSettings()
   qSettings.setValue("cwtext",cwText);
   qSettings.setValue("cwtone",cwTone);
   qSettings.setValue("cwWPM",cwWPM);
-  qSettings.setValue("enableCW",enableCW);
+//  qSettings.setValue("enableCW",enableCW);
   qSettings.endGroup();
 }
 
@@ -49,7 +49,7 @@ void cwConfig::getParams()
   getValue(cwText,ui->cwTextLineEdit);
   getValue(cwTone,ui->cwToneSpinBox);
   getValue(cwWPM,ui->cwWPMSpinBox);
-  getValue(enableCW,ui->enableCWCheckBox);
+//  getValue(enableCW,ui->enableCWCheckBox);
   changed=false;
   if(cwTextCopy!=cwText
      || cwToneCopy!=cwTone
@@ -62,6 +62,6 @@ void cwConfig::setParams()
   setValue(cwText,ui->cwTextLineEdit);
   setValue(cwTone,ui->cwToneSpinBox);
   setValue(cwWPM,ui->cwWPMSpinBox);
-  setValue(enableCW,ui->enableCWCheckBox);
+//  setValue(enableCW,ui->enableCWCheckBox);
 
 }

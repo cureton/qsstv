@@ -429,9 +429,14 @@ unsigned int sstvRx::setOffset(unsigned int offset,bool ask)
     {
       xOffset=offset*1000;
     }
+  syncNarrowProc.clear();
+  syncWideProc.clear();
+  scopeViewerData->clear();
   syncNarrowProc.setOffset(xOffset);
   syncWideProc.setOffset(xOffset);
   scopeViewerData->setOffset(xOffset);
+
+
   return xOffset/1000;
 }
 #endif

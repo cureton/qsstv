@@ -76,6 +76,9 @@ QSSTV 9.1.x has the following new features compared to QSSTV 8.2.x
 
 \page changelog Change log
 
+\li 20160416 QSSTV 9.1.6
+ - ftp transfer crashes when transmitting in hybrid mode-> solved
+
 \li 20160416 QSSTV 9.1.5
  - upload received images to ftp server (sstv and drm) gave file error -> solved
 

@@ -137,6 +137,7 @@ public:
     newClock=false;
     return nc;
   }
+  void clear();
   void recalculateMatchArray();
   DSPFLOAT getNewClock() {return modifiedClock;}
   void setEnabled(bool enable) {enabled=enable;}

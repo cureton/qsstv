@@ -7,7 +7,7 @@
 
 const QString MAJORVERSION  = "9.1";
 const QString CONFIGVERSION = "9.0";
-const QString MINORVERSION  = ".5";
+const QString MINORVERSION  = ".6";
 const QString LOGVERSION = ("qsstv."+MAJORVERSION+MINORVERSION+".log");
 const QString ORGANIZATION = "ON4QZ";
 const QString APPLICATION  = ("qsstv_" +CONFIGVERSION);

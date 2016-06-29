@@ -31,7 +31,6 @@
 
 #define ITERATIONS 8000
 
-
 /**
  * \class calibration
  *

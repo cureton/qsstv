@@ -4,6 +4,7 @@
 #include <QThread>
 #include "appdefs.h"
 #include "drmparams.h"
+#include "testpatternselection.h"
 
 #define SILENCEDELAY 0.600           // send silence after transmission
 
@@ -59,6 +60,7 @@ public:
   etxState getTXState() { return txState;}
   void setDRMTxParams(drmTxParams params);
   //  bool initDRMFIX(txSession *sessionPtr);
+  void txTestPattern(imageViewer *ivPtr, etpSelect sel);
 
 
 private:

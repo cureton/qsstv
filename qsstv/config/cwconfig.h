@@ -6,7 +6,7 @@
 extern QString cwText;
 extern int cwTone;
 extern int cwWPM;
-extern bool enableCW;
+//extern bool enableCW;
 
 
 namespace Ui {

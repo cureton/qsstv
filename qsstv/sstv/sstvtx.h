@@ -1,6 +1,7 @@
 #ifndef SSTVTX_H
 #define SSTVTX_H
 #include "sstvparam.h"
+#include "testpatternselection.h"
 
 
 class modeBase;
@@ -17,6 +18,7 @@ public:
   void abort();
   bool aborted();
   void applyTemplate(QString templateFilename, bool useTemplate, imageViewer *ivPtr);
+  void createTestPattern(imageViewer *ivPtr, etpSelect sel);
 
 
 private:

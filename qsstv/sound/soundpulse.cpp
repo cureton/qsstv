@@ -128,6 +128,10 @@ int soundPulse::write(uint numFrames)
   return numFrames;
 }
 
+void soundPulse::waitPlaybackEnd()
+{
+
+}
 
 
 void soundPulse::flushCapture()

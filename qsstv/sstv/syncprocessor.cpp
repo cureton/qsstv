@@ -1131,4 +1131,15 @@ void syncProcessor::setOffset(unsigned int dataScopeOffset)
   scopeViewerSyncNarrow->setOffset(xOffset);
   scopeViewerSyncWide->setOffset(xOffset);
 }
+
+void syncProcessor::clear()
+{
+  scopeViewerSyncNarrow->clear();
+  scopeViewerSyncWide->clear();
+  xOffset=0;
+  scopeViewerSyncNarrow->setOffset(xOffset);
+  scopeViewerSyncWide->setOffset(xOffset);
+}
+
+
 #endif

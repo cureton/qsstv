@@ -44,6 +44,7 @@
 #include "mainwindow.h"
 
 
+
 QMutex txMutex;
 
 int templateIndex;
@@ -279,8 +280,8 @@ void txFunctions::stopThread()
 {
   abort=true;
  if(!isRunning()) return;
-  while(abort)
-    {
+  while(abort && isRunning())
+  {
       qApp->processEvents();
     }
 }
@@ -501,4 +502,9 @@ void txFunctions::switchTxState(etxState newState)
 {
   addToLog(QString("%1 to %2").arg(txStateStr[txState]).arg(txStateStr[newState]),LOGTXFUNC);
   txState=newState;
+}
+
+void txFunctions::txTestPattern(imageViewer *ivPtr,etpSelect sel)
+{
+  sstvTxPtr->createTestPattern(ivPtr,sel);
 }

@@ -43,12 +43,15 @@ private slots:
   void slotSetFrequency(int freqIndex);
 
 
+
 #ifndef QT_NO_DEBUG
   void slotShowDataScope();
   void slotShowSyncScopeNarrow();
   void slotShowSyncScopeWide();
   void slotScopeOffset();
+  void slotClearScope();
   void slotDumpSamplesPerLine();
+  void slotTxTestPattern();
 
 #endif
 
