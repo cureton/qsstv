@@ -59,7 +59,8 @@ mainWindow::mainWindow(QWidget *parent) : QMainWindow(parent),  ui(new Ui::MainW
   bsrPushButton=new QPushButton("BSR",this);
 
   freqComboBox=new QComboBox(this);
-  idPushButton=new QPushButton("ID",this);
+  idPushButton=new QPushButton("WF ID",this);
+  cwPushButton=new QPushButton("CW ID",this);
   QFont f;
 
   freqDisplay = new QLabel(this);
@@ -92,6 +93,7 @@ mainWindow::mainWindow(QWidget *parent) : QMainWindow(parent),  ui(new Ui::MainW
   ui->statusBar->addPermanentWidget(wfTextPushButton);
   ui->statusBar->addPermanentWidget(bsrPushButton);
   ui->statusBar->addPermanentWidget(idPushButton);
+  ui->statusBar->addPermanentWidget(cwPushButton);
   ui->statusBar->addPermanentWidget(&pttText);
   ui->statusBar->addPermanentWidget(pttIcon);
   statusBarPtr=statusBar(); // must be after setup UI
@@ -122,7 +124,8 @@ mainWindow::mainWindow(QWidget *parent) : QMainWindow(parent),  ui(new Ui::MainW
   connect(ui->actionAboutQSSTV, SIGNAL(triggered()),SLOT(slotAboutQSSTV()));
   connect(ui->actionAboutQt, SIGNAL(triggered()),SLOT(slotAboutQt()));
   connect(ui->actionUsersGuide, SIGNAL(triggered()),SLOT(slotDocumentation()));
-  connect(idPushButton, SIGNAL(clicked()), this, SLOT(slotSendID()));
+  connect(idPushButton, SIGNAL(clicked()), this, SLOT(slotSendWFID()));
+  connect(cwPushButton, SIGNAL(clicked()), this, SLOT(slotSendCWID()));
   connect(bsrPushButton, SIGNAL(clicked()), this, SLOT(slotSendBSR()));
   connect(freqComboBox,SIGNAL(activated(int)),SLOT(slotSetFrequency(int)));
   connect(wfTextPushButton, SIGNAL(clicked()), this, SLOT(slotSendWfText()));
@@ -402,12 +405,15 @@ void mainWindow::slotSendBSR()
 }
 
 
-void mainWindow::slotSendID()
+void mainWindow::slotSendWFID()
 {
-  txWidgetPtr->sendID();
+  txWidgetPtr->sendWFID();
 }
 
-
+void mainWindow::slotSendCWID()
+{
+  txWidgetPtr->sendCWID();
+}
 
 void mainWindow::slotSendWfText()
 {

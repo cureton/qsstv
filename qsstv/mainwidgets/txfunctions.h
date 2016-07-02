@@ -28,7 +28,8 @@ public:
     TXIDLE,	//!< in idle loop
     TXACTIVE,
     TXSENDTONE,
-    TXSENDID,
+    TXSENDWFID,
+    TXSENDCWID,
     TXSENDDRM,
     TXSENDDRMBINARY,
     TXSENDDRMBSR,

@@ -31,7 +31,7 @@ void sstvTx::init()
 void sstvTx::sendPreamble()
 {
   addToLog("txFunc:sendPreamble",LOGTXFUNC);
-  if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
+
   synthesPtr->sendTone(0.1,1900.,0,true);
   synthesPtr->sendTone(0.1,1500.,0,true);
   synthesPtr->sendTone(0.1,1900.,0,true);
@@ -214,6 +214,7 @@ double sstvTx::calcTxTime(int overheadTime)
 bool sstvTx::sendImage(imageViewer *ivPtr)
 {
   modeBase::eModeBase mb;
+  if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
   if(txSSTVParam.mode==FAX480)
   {
     for (int i=0;i<1220;i++)

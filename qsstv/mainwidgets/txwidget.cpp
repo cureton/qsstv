@@ -324,12 +324,18 @@ void txWidget::sendBSR()
 }
 
 
-void txWidget::sendID()
+void txWidget::sendWFID()
 {
 
   waterfallPtr->setText(myCallsign);
-  dispatcherPtr->startTX(txFunctions::TXSENDID);
-  addToLog("sendID",LOGTXMAIN);
+  dispatcherPtr->startTX(txFunctions::TXSENDWFID);
+  addToLog("sendWFID",LOGTXMAIN);
+}
+
+void txWidget::sendCWID()
+{
+  dispatcherPtr->startTX(txFunctions::TXSENDCWID);
+  addToLog("sendWFID",LOGTXMAIN);
 }
 
 void txWidget::sendWfText()
@@ -338,7 +344,7 @@ void txWidget::sendWfText()
   if((wf.exec()==QDialog::Accepted)&&(!wf.text().isEmpty()))
     {
       waterfallPtr->setText(wf.text());
-      dispatcherPtr->startTX(txFunctions::TXSENDID);
+      dispatcherPtr->startTX(txFunctions::TXSENDWFID);
       addToLog("sendID",LOGTXMAIN);
     }
 }

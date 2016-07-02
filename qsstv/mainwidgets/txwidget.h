@@ -58,7 +58,8 @@ public:
   //  void sendFIX();
   void sendBSR();
   void sendWfText();
-  void sendID();
+  void sendWFID();
+  void sendCWID();
 
 public slots:
   void slotGetParams();

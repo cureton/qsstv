@@ -33,7 +33,8 @@ double rxClock;
 double txClock;
 bool pulseSelected;
 bool alsaSelected;
-bool pttToneRightChannel;
+bool swapChannel;
+bool pttToneOtherChannel;
 QString inputAudioDevice;
 QString outputAudioDevice;
 soundBase::edataSrc soundRoutingInput;
@@ -71,7 +72,8 @@ void soundConfig::readSettings()
   outputAudioDevice=qSettings.value("outputAudioDevice","default").toString();
   alsaSelected=qSettings.value("alsaSelected",false).toBool();
   pulseSelected=qSettings.value("pulseSelected",false).toBool();
-  pttToneRightChannel=qSettings.value("pttToneRightChannel",false).toBool();
+  swapChannel=qSettings.value("swapChannel",false).toBool();
+  pttToneOtherChannel=qSettings.value("pttToneOtherChannel",false).toBool();
   soundRoutingInput=  (soundBase::edataSrc)qSettings.value("soundRoutingInput",  0 ).toInt();
   soundRoutingOutput= (soundBase::edataDst)qSettings.value("soundRoutingOutput", 0 ).toInt();
   recordingSize= qSettings.value("recordingSize", 100 ).toInt();
@@ -90,7 +92,8 @@ void soundConfig::writeSettings()
   qSettings.setValue("outputAudioDevice",outputAudioDevice);
   qSettings.setValue("alsaSelected",alsaSelected);
   qSettings.setValue("pulseSelected",pulseSelected);
-  qSettings.setValue("pttToneRightChannel",pttToneRightChannel);
+  qSettings.setValue("swapChannel",swapChannel);
+  qSettings.setValue("pttToneOtherChannel",pttToneOtherChannel);
   qSettings.setValue ("soundRoutingInput", soundRoutingInput );
   qSettings.setValue ("soundRoutingOutput",soundRoutingOutput );
   qSettings.setValue ("recordingSize",recordingSize );
@@ -106,7 +109,8 @@ void soundConfig::setParams()
   setValue(outputAudioDevice,ui->outputPCMNameComboBox);
   setValue(alsaSelected,ui->alsaRadioButton);
   setValue(pulseSelected,ui->pulseRadioButton);
-  setValue(pttToneRightChannel,ui->pttToneCheckBox);
+  setValue(swapChannel,ui->swapChannelCheckBox);
+  setValue(pttToneOtherChannel,ui->pttToneCheckBox);
   if(soundRoutingInput==soundBase::SNDINCARD) ui->inFromCard->setChecked(true);
   else if (soundRoutingInput==soundBase::SNDINFROMFILE) ui->inFromFile->setChecked(true);
   else ui->inRecordFromCard->setChecked(true);
@@ -132,7 +136,8 @@ void soundConfig::getParams()
   getValue(outputAudioDevice,ui->outputPCMNameComboBox);
   getValue(alsaSelected,ui->alsaRadioButton);
   getValue(pulseSelected,ui->pulseRadioButton);
-  getValue(pttToneRightChannel,ui->pttToneCheckBox);
+  getValue(swapChannel,ui->swapChannelCheckBox);
+  getValue(pttToneOtherChannel,ui->pttToneCheckBox);
 
   if (ui->inFromCard->isChecked()) soundRoutingInput=soundBase::SNDINCARD;
   else if(ui->inFromFile->isChecked()) soundRoutingInput=soundBase::SNDINFROMFILE;

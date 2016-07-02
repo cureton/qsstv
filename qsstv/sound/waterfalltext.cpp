@@ -148,7 +148,8 @@ void waterfallText::setupImage(QString txt)
   image.fill(Qt::black);
   p.begin(&image);
   p.setPen(pen);
-  p.setFont(QFont(wfFont,wfFontSize,QFont::Light));
+  if(wfBold) p.setFont(QFont(wfFont,wfFontSize,QFont::Bold));
+  else p.setFont(QFont(wfFont,wfFontSize,QFont::Light));
   rct=p.boundingRect(QRect(0,0,imageWidth,30),Qt::AlignTop|Qt::AlignCenter,txt);
   p.end();
   height=rct.height();
@@ -157,7 +158,8 @@ void waterfallText::setupImage(QString txt)
   image.fill(Qt::black);
   p.begin(&image);
   p.setPen(pen);
-  p.setFont(QFont(wfFont,wfFontSize,QFont::Light));
+  if(wfBold) p.setFont(QFont(wfFont,wfFontSize,QFont::Bold));
+  else p.setFont(QFont(wfFont,wfFontSize,QFont::Light));
   p.drawText(QRectF(0,0,width,height),Qt::AlignCenter,txt);
   p.end();
   line=image.height();
