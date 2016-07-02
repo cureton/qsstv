@@ -37,7 +37,8 @@ private slots:
   void slotDocumentation();
   void slotCalibrate();
   void slotModeChange(int);
-  void slotSendID();
+  void slotSendWFID();
+  void slotSendCWID();
   void slotSendBSR();
   void slotSendWfText();
   void slotSetFrequency(int freqIndex);
@@ -67,6 +68,7 @@ private:
   QPushButton *fixPushButton;
   QPushButton *bsrPushButton;
   QPushButton *idPushButton;
+  QPushButton *cwPushButton;
   QComboBox *freqComboBox;
   QLabel pttText;
   QLabel *pttIcon;

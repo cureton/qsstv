@@ -9,6 +9,8 @@ extern QString fixWF;
 extern QString bsrWF;
 extern QString wfFont;
 extern int wfFontSize;
+extern bool wfBold;
+
 
 
 namespace Ui {

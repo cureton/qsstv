@@ -132,6 +132,7 @@ void txFunctions::run()
             }
           startProgress(drmTxPtr->calcTxTime(waterfallTime));
           addToLog("start of wf",LOGTXFUNC);
+          if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
           waterfallPtr->setText("START BIN");
           synthesPtr->sendWFText();
           addToLog("start of txDrm",LOGTXFUNC);
@@ -159,6 +160,7 @@ void txFunctions::run()
               break;
             }
           startProgress(drmTxPtr->calcTxTime(waterfallTime));
+          if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
           addToLog("start of wf",LOGTXFUNC);
           waterfallPtr->setText(startPicWF);
           synthesPtr->sendWFText();
@@ -182,6 +184,7 @@ void txFunctions::run()
         case TXSENDDRMBSR:
           waitTxOn();
           waterfallTime=waterfallPtr->getDuration(bsrWF);
+          if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
           startProgress(drmTxPtr->calcTxTime(waterfallTime));
           synthesPtr->sendWFText();
           drmTxPtr->start();
@@ -193,6 +196,7 @@ void txFunctions::run()
         case TXSENDDRMFIX:
           waitTxOn();
           waterfallTime=waterfallPtr->getDuration(fixWF);
+          if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
           startProgress(drmTxPtr->calcTxTime(waterfallTime));
           synthesPtr->sendWFText();
           drmTxPtr->start();
@@ -210,17 +214,27 @@ void txFunctions::run()
         case TXSENDDRMTXT:
           waitTxOn();
         break;
-        case TXSENDID:
+        case TXSENDWFID:
           addToLog("Entered TXSENDID",LOGTXFUNC);
           waitTxOn();
           addToLog("after txon TXSENDID",LOGTXFUNC);
           startProgress(waterfallPtr->getDuration());
+          if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
           synthesPtr->sendWFText();
           addToLog("TXSENDID waiting for end",LOGTXFUNC);
           waitEnd();
           addToLog("TXSENDID  end",LOGTXFUNC);
           switchTxState(TXIDLE);
         break;
+
+        case TXSENDCWID:
+           waitTxOn();
+           if(useVOX) synthesPtr->sendTone(1.,1700.,0,false);
+           sendCW();
+           waitEnd();
+           switchTxState(TXIDLE);
+        break;
+
         case TXSSTVIMAGE:
           waitTxOn();
           addToLog("Entered SSTVTXIMAGE",LOGTXFUNC);

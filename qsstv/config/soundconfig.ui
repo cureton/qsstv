@@ -250,11 +250,22 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="pttToneCheckBox">
-     <property name="text">
-      <string>PTT tone on right audio channel</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QCheckBox" name="swapChannelCheckBox">
+       <property name="text">
+        <string>Swap left and right channel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="pttToneCheckBox">
+       <property name="text">
+        <string>PTT tone on other audio channel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="_5">

@@ -140,10 +140,14 @@ SOUNDFRAME synthesizer::filter(double sample)
 //   {
 //      tst+=tst<<16;
 //   }
- if(pttToneRightChannel)
+ if(pttToneOtherChannel)
    {
      ptt=((quint32)toneBuffer[(pttToneCounter++)%TONEBUFLEN])<< 16;
      tst+=ptt;
+   }
+ if(swapChannel)
+   {
+     tst=((tst>>16) & 0xFFFF)+(tst<<16);
    }
  return tst;
 }
@@ -163,6 +167,15 @@ void synthesizer::write(double sample)
 // buffer must already contain correct stereo information
 void synthesizer::writeBuffer(quint32 *buffer, int len)
 {
+  int i;
+   if(swapChannel)
+     {
+       for(i=0;i<len;i++)
+        {
+           buffer[i]=((buffer[i]>>16) & 0xFFFF)+(buffer[i]<<16);
+
+        }
+     }
   while((!soundIOPtr->txBuffer.put(buffer,len)) && (soundIOPtr->isPlaying()))
     {
       usleep(2000);

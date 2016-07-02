@@ -57,7 +57,11 @@ void CTransmitData::ProcessDataInternal(CParameter&)
       switch (eOutputFormat)
         {
         case OF_REAL_VAL:
-          vecsDataOut[iCurIndex] = vecsDataOut[iCurIndex + 1] = sCurOutReal;
+//          vecsDataOut[iCurIndex]  = sCurOutReal;
+          vecsDataOut[iCurIndex]  = sCurOutReal;
+          vecsDataOut[iCurIndex + 1] = 0;
+
+
           //                  (short) 15000.0*sin(pi*1500.0*i/48000.0) ; //  pa0mbo 1500 Hz test signaal
           //                printf("%d %d \n", i/2 , vecsDataOut[iCurIndex]);
         break;
